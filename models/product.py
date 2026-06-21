@@ -1,9 +1,11 @@
+from dataclasses import dataclass
+
+@dataclass
 class Product:
-    def __init__(self,name,destination,category,tax):
-        self.name=name
-        self.destination=destination
-        self.category=category
-        self.tax=tax
+    name:str
+    destination:str
+    category:str
+    tax:int
     
     def is_high_tax(self):
         return self.tax>=3000
