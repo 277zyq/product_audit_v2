@@ -1,0 +1,5 @@
+name,destination,category,tax,risk,reason
+DRONE,IRAN,ELECTRONICS,5000,HIGH,命中黑名单商品和高风险国家
+BOOK,US,EDUCATION,100,LOW,基础审核通过
+CHIP,JAPAN,SEMICONDUCTOR,8000,HIGH,命中黑名单商品
+TOY CAR,RUSSIA,TOY,300,MEDIUM,命中高风险国家

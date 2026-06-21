@@ -1,0 +1,4 @@
+{
+  "blacklist_products": ["DRONE", "CHIP"],
+  "high_risk_countries": ["IRAN", "RUSSIA"]
+}
