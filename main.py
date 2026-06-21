@@ -13,11 +13,15 @@ PRODUCTS_PATH = DATA_DIR / "products.csv"
 OUTPUT_PATH = OUTPUT_DIR / "product_risk_result.csv"
 
 def build_product_from_row(row):
+    try:
+        tax = int(row['tax'])
+    except ValueError:
+        tax = 0
     return Product(
         name=row["name"].strip().upper(),
         destination=row["destination"].strip().upper(),
         category=row["category"].strip().upper(),
-        tax=int(row["tax"]),
+        tax=tax,
     )
 
 def main():
