@@ -3,6 +3,9 @@ from pathlib import Path
 from models.product import Product
 from services.risk_checker import check_product_risk
 from utils.file_io import read_csv_file, read_json_file, write_csv_file
+import logging
+
+logging.basicConfig(level=logging.INFO,format='%(levelname)s:%(message)s')
 
 BASE_DIR = Path(__file__).resolve().parent
 DATA_DIR = BASE_DIR / "data"
@@ -38,8 +41,8 @@ def main():
     fieldnames = ["name", "destination", "category", "tax", "risk", "reason"]
     write_csv_file(OUTPUT_PATH, results, fieldnames)
 
-    print(f'审核完成，共输出{len(results)}条记录')
-    print(f'输出文件{OUTPUT_PATH}')
+    logging.info(f'审核完成，共输出{len(results)}条记录')
+    logging.info(f'输出文件{OUTPUT_PATH}')
 
 if __name__ == '__main__':
     main() 
