@@ -1,9 +1,11 @@
 from pathlib import Path
-
 from models.product import Product
 from services.risk_checker import check_product_risk
 from utils.file_io import read_csv_file, read_json_file, write_csv_file
 import logging
+import argparse
+
+
 
 logging.basicConfig(level=logging.INFO,format='%(levelname)s:%(message)s')
 
@@ -14,6 +16,19 @@ OUTPUT_DIR = BASE_DIR / "output"
 CONFIG_PATH = DATA_DIR / "risk_config.json"
 PRODUCTS_PATH = DATA_DIR / "products.csv"
 OUTPUT_PATH = OUTPUT_DIR / "product_risk_result.csv"
+
+def parse_args(argv=None):
+    parser = argparse.ArgumentParser(description='商品风险审查工具')
+    parser.add_argument('-c','--config',
+                        default=CONFIG_PATH,
+                        help='风险审查配置json清单')
+    parser.add_argument('-i','--input',default=PRODUCTS_PATH,help='产品csv')
+    parser.add_argument('-o','--output',default=OUTPUT_PATH,help='审查输出')
+    return parser.parse_args(argv)
+                        
+                        
+
+
 
 def build_product_from_row(row):
     try:
@@ -28,8 +43,9 @@ def build_product_from_row(row):
     )
 
 def main():
-    config = read_json_file(CONFIG_PATH)
-    rows = read_csv_file(PRODUCTS_PATH)
+    args = parse_args()
+    config = read_json_file(args.config)
+    rows = read_csv_file(args.input)
 
     results=[]
     
@@ -39,10 +55,10 @@ def main():
         results.append(result)
     OUTPUT_DIR.mkdir(exist_ok=True)
     fieldnames = ["name", "destination", "category", "tax", "risk", "reason"]
-    write_csv_file(OUTPUT_PATH, results, fieldnames)
+    write_csv_file(args.output, results, fieldnames)
 
     logging.info(f'审核完成，共输出{len(results)}条记录')
-    logging.info(f'输出文件{OUTPUT_PATH}')
+    logging.info(f'输出文件{args.output}')
 
 if __name__ == '__main__':
     main() 
