@@ -1,3 +1,4 @@
+from models.product import AuditedProduct
 def check_product_risk(product, config):
     blacklist_products = config["blacklist_products"]
     high_risk_countries = config["high_risk_countries"]
@@ -18,11 +19,11 @@ def check_product_risk(product, config):
         risk = "LOW"
         reason = "基础审核通过"
 
-    return {
-        "name": product.name,
-        "destination": product.destination,
-        "category": product.category,
-        "tax": product.tax,
-        "risk": risk,
-        "reason": reason,
-    }
+    return AuditedProduct(
+            name=product.name,
+            destination=product.destination,
+            category=product.category,
+            tax=product.tax,
+            risk=risk,
+            reason=reason)
+            

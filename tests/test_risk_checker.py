@@ -16,8 +16,8 @@ def test_blacklist_and_high_risk_country():
 
      result = check_product_risk(product, config)
 
-     assert result['risk'] == 'HIGH'
-     assert result['reason'] == '命中黑名单商品和高风险国家' 
+     assert result.risk== 'HIGH'
+     assert result.reason == '命中黑名单商品和高风险国家' 
 
 def test_normal_product():
     product = Product("BOOK", "US", "EDUCATION", 100)
@@ -28,5 +28,5 @@ def test_normal_product():
 
     result = check_product_risk(product, config)
 
-    assert result["risk"] == "LOW"
-    assert result["reason"] == "基础审核通过"
+    assert result.risk == "LOW"
+    assert result.reason == "基础审核通过"

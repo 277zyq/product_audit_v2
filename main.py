@@ -17,7 +17,7 @@ CONFIG_PATH = DATA_DIR / "risk_config.json"
 PRODUCTS_PATH = DATA_DIR / "products.csv"
 OUTPUT_PATH = OUTPUT_DIR / "product_risk_result.csv"
 
-def parse_args(argv=None):
+def parse_args(argv:list[str]=None):
     parser = argparse.ArgumentParser(description='商品风险审查工具')
     parser.add_argument('-c','--config',
                         default=CONFIG_PATH,
@@ -52,7 +52,7 @@ def main():
     for row in rows:
         product = build_product_from_row(row)
         result = check_product_risk(product,config)
-        results.append(result)
+        results.append(result.to_result_row())
     OUTPUT_DIR.mkdir(exist_ok=True)
     fieldnames = ["name", "destination", "category", "tax", "risk", "reason"]
     write_csv_file(args.output, results, fieldnames)
