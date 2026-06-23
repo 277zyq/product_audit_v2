@@ -1,5 +1,6 @@
 import sys
 from pathlib import Path
+from utils.decorators import timer
 
 PROJECT_DIR = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(PROJECT_DIR))
@@ -55,3 +56,13 @@ def test_parse_args_with_custom_values():
     assert args.config == "custom_config.json"
     assert args.input == "custom_products.csv"
     assert args.output == "custom_result.csv"
+
+def test_decorator():
+
+    @timer
+    def add(a,b):
+        return a+b
+    
+    a=add(1,2)
+
+    assert a == 3
