@@ -12,6 +12,12 @@ def read_csv_file(file_path) ->list[dict]:
         rows = list(reader)
     return rows
 
+def iter_csv_file(file_path):
+    with open(file_path,'r',encoding='utf-8') as file:
+        reader = csv.DictReader(file)
+        for row in reader:
+            yield row
+
 def write_csv_file(file_path,rows,fieldnames)->bool:
     with open(file_path,'w',encoding='utf-8') as file:
         writer = csv.DictWriter(file,fieldnames=fieldnames)
