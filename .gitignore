@@ -4,3 +4,4 @@ __pycache__/
 .pytest_cache/
 output/123.csv
 prcat.py
+output/test.csv

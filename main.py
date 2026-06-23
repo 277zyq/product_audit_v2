@@ -1,7 +1,8 @@
 from pathlib import Path
 from models.product import Product
+from services.report_service import build_risk_summary
 from services.risk_checker import check_product_risk
-from utils.file_io import read_csv_file, read_json_file, write_csv_file,iter_csv_file
+from utils.file_io import read_json_file, write_csv_file,iter_csv_file
 import logging
 import argparse
 from utils.decorators import timer
@@ -58,6 +59,8 @@ def main():
     OUTPUT_DIR.mkdir(exist_ok=True)
     fieldnames = ["name", "destination", "category", "tax", "risk", "reason"]
     write_csv_file(args.output, results, fieldnames)
+
+    build_risk_summary(args.output,OUTPUT_DIR/'test.csv')
 
     logging.info(f'审核完成，共输出{len(results)}条记录')
     logging.info(f'输出文件{args.output}')
