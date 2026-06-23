@@ -1,7 +1,7 @@
 from pathlib import Path
 from models.product import Product
 from services.risk_checker import check_product_risk
-from utils.file_io import read_csv_file, read_json_file, write_csv_file
+from utils.file_io import read_csv_file, read_json_file, write_csv_file,iter_csv_file
 import logging
 import argparse
 from utils.decorators import timer
@@ -47,7 +47,7 @@ def build_product_from_row(row):
 def main():
     args = parse_args()
     config = read_json_file(args.config)
-    rows = read_csv_file(args.input)
+    rows = iter_csv_file(args.input)
 
     results=[]
     

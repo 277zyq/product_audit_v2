@@ -1,6 +1,7 @@
 import sys
 from pathlib import Path
 from utils.decorators import timer
+import pytest
 
 PROJECT_DIR = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(PROJECT_DIR))
@@ -66,3 +67,13 @@ def test_decorator():
     a=add(1,2)
 
     assert a == 3
+
+def test_build_product_from_row_without_tax():
+    row = {
+        "name": "drone",
+        "destination": "Iran",
+        "category": "electronics",
+    }
+
+    with pytest.raises(KeyError):
+        build_product_from_row(row)
