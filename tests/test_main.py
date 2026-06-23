@@ -8,15 +8,18 @@ sys.path.insert(0, str(PROJECT_DIR))
 
 from main import CONFIG_PATH, OUTPUT_PATH, PRODUCTS_PATH, build_product_from_row, parse_args
 
-def test_build_product_from_row_with_valid_tax():
-    row = {
+@pytest.fixture
+def valid_product_row():
+    return{
         "name": " drone ",
         "destination": " Iran ",
         "category": " electronics ",
         "tax": "5000",
     }
 
-    product = build_product_from_row(row)
+
+def test_build_product_from_row_with_valid_tax(valid_product_row):
+    product = build_product_from_row(valid_product_row)
 
     assert product.name == "DRONE"
     assert product.destination == "IRAN"
