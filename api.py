@@ -7,10 +7,6 @@ from utils.file_io import read_json_file
 
 app=FastAPI()
 
-@app.get('/health')
-def check_health():
-    return {'status':'good'}
-
 class ProductRequest(BaseModel):
     name:str
     destination:str
